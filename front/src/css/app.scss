@@ -1,2 +1,8 @@
 @import 'theme/theme.scss';
 
+//components css
+@import 'components/Navbar.scss';
+@import 'components/TodoList.scss';
+
+//pages css
+@import 'pages/IndexPage.scss';
