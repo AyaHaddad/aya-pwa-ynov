@@ -1,4 +1,5 @@
 <template>
+
   <div class="navbar">
       <div class="navbarSection">
           <div class="navbarBtn">
@@ -7,52 +8,72 @@
               </router-link>
           </div>
           <div class="navbarBtn purple">
-              <q-icon name="add" color="fff"/>
+              <q-icon name="add" color="fff" @click="openDialogCreate = true"/>
           </div>
           <div class="navbarBtn">
               <router-link to="/contact">
                   <q-icon name="person" />
               </router-link>
           </div>
+
+              <q-dialog
+      v-model="openDialogCreate"
+      style="min-width: 300px"
+    >
+      <q-card>
+        <q-card-section class="flex justify-end">
+          <q-icon
+            name="close"
+            @click="openDialogCreate = false"
+          />
+        </q-card-section>
+
+        <q-item-label
+          class="text-bold q-mt-l text-center"
+          style="font-size: 1rem"
+          >Créer une nouvelle liste</q-item-label
+        >
+
+        <p class="text-start q-ma-md">Nom de la liste</p>
+        <q-input
+          v-model="listName"
+          class="q-ma-md"
+          outlined
+          dense
+          placeholder="Nom de la liste"
+        />
+
+        <q-card-section class="row justify-center">
+          <q-btn
+            label="Annuler"
+            flat
+            no-caps
+            class="q-mb-md items-start"
+            @click="openDialogCreate = false"
+          />
+          <q-btn
+            label="Créer"
+            color="accent"
+            no-caps
+            class="q-mb-md items-start"
+            @click="handleAddList"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
       </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-    .navbar {
-        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        height: 70px;
-        position: fixed;
-        bottom: 0;
-        .navbarSection {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-        .navbarBtn {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+<script setup lang="ts">
+import { createList } from '../services/list'
+import { ref } from 'vue'
 
-            &.purple {
-              box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-                background: linear-gradient(125.54deg, #613973 -0.39%, #BB46E4 100%);
+const openDialogCreate = ref(false)
+const listName = ref('')
 
-            }
-
-            * {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #828282 !important;
-                font-size: 30px;
-                text-align: center;
-            }
-        }
-    }
-</style>
+const handleAddList = () => {
+  createList({ title: listName.value })
+  openDialogCreate.value = false
+}
+</script>
