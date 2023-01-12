@@ -17,7 +17,8 @@
         </h2>
       </div>
     <div class="lists">
-        <TodoList/>
+      <!-- <p v-if="lists.length <= 0">⚠️ Oops! Vous n'avez pas encore de liste</p>
+      <TodoList :list="list" v-for="list of lists" :key="list._id" /> -->
       </div>
     </div>
     <NavBar />
@@ -25,5 +26,15 @@
 </template>
 
 <script setup>
+// import { ref } from 'vue'
+
 import NavBar from '../components/NavBar.vue'
+// import TodoList from '../components/TodoList.vue'
+// import { getAllLists } from '../services/list'
+
+// const lists = ref([])
+// (async () => {
+//   const resLists = await getAllLists()
+//   lists.value = resLists
+// })()
 </script>
