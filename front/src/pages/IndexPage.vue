@@ -17,7 +17,7 @@
         </h2>
       </div>
     <div class="lists">
-      <p v-if="lists.length <= 0">⚠️ Oops! Vous n'avez pas encore de liste</p>
+      <p v-if="lists.length <= 0"> Vous n'avez pas encore de liste ⚠️</p>
       <TodoList v-for="list in lists" :key="list.title" :list="list"/>
       </div>
     </div>
